@@ -91,3 +91,12 @@ jobs:
         run: |
           ls
           aws s3 cp *.jar s3://octank-config-rules/githubactions/
+          
+      - name: CodeDeploy to EC2
+        id: deploy
+        run: |
+          aws deploy create-deployment \
+            --application-name Git_application \
+            --deployment-group-name dg_Git_Application \
+            --deployment-config-name CodeDeployDefault.AllAtOnce\
+            --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
