@@ -90,5 +90,4 @@ jobs:
       - name: deploy to S3
         run: |
           ls
-          aws s3 ls
-          aws s3 cp . s3://octank-config-rules/githubactions/
+          aws s3 cp *.jar s3://octank-config-rules/githubactions/
