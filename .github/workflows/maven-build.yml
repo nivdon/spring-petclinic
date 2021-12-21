@@ -96,7 +96,7 @@ jobs:
       - name: deploy to S3
         run: |
           ls
-          aws s3 cp . s3://octank-config-rules/githubactions/
+          aws s3 cp *.zip s3://octank-config-rules/githubactions/
           
       - name: CodeDeploy to EC2
         id: deploy
@@ -105,4 +105,5 @@ jobs:
             --application-name Git_application \
             --deployment-group-name dg_Git_Application \
             --deployment-config-name CodeDeployDefault.AllAtOnce\
-            --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
+            ----s3-location bucket=octank-config-rules,bundleType=zip,key=deploy_artifacts.zip
+            # --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
