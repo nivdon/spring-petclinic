@@ -26,12 +26,18 @@ jobs:
 
       - name: Build with Maven Wrapper
         run: ./mvnw -B package
+        
+      - name: Create Artifacts
+        run: |
+          apt-get install zip
+          zip deplou_artifacts.zip target/*.jar appspec.yml run.sh
+          
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
         with:
           name: jar-file
-          path: target/*.jar
+          path: deplou_artifacts.zip
         
   test:
     runs-on: ubuntu-latest
@@ -90,7 +96,7 @@ jobs:
       - name: deploy to S3
         run: |
           ls
-          aws s3 cp *.jar s3://octank-config-rules/githubactions/
+          aws s3 cp . s3://octank-config-rules/githubactions/
           
       - name: CodeDeploy to EC2
         id: deploy
