@@ -80,7 +80,7 @@ jobs:
     needs: [build]
     env:
       Region: us-east-1
-      S3Folder: githubactions2
+      S3Folder: githubactions3
     permissions:
       id-token: write
       contents: read
