@@ -1,3 +1,3 @@
 #!/bin/bash
-cd student
+cd /home/ec2-user/student
 java -jar spring-petclinic*.jar
