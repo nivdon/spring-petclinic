@@ -4,11 +4,7 @@ files:
   - source: target/
     destination: /home/ec2-user/student/
 hooks:
-  AfterInstall:
-   - location: setup.sh
-     timeout: 300
-     runas: root
   ApplicationStart:
-   - location: run.sh
+   - location: setup.sh
      timeout: 300
      runas: root

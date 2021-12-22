@@ -1,4 +1,6 @@
 #!/bin/bash
 cd /home/ec2-user/student
+echo "running the Java application now"
+#java -jar spring-petclinic*.jar > /dev/null 2> /dev/null < /dev/null &
 java -jar spring-petclinic*.jar &
-exit 0
+echo "ran jar file in background"
