@@ -80,7 +80,7 @@ jobs:
     needs: [build]
     env:
       Region: us-east-1
-      S3Folder: githubactions1
+      S3Folder: githubactions2
     permissions:
       id-token: write
       contents: read
@@ -109,6 +109,5 @@ jobs:
             --application-name Git_application \
             --deployment-group-name dg_Git_Application \
             --deployment-config-name CodeDeployDefault.AllAtOnce \
-            --s3-location bucket=octank-config-rules,bundleType=zip,key=${{ env.S3Folder }}/deploy_artifacts.zip \
-            # --github-location repository=${{ github.repository }},commitId=${{ github.sha }} \
-            --region ${{ env.Region }}
+            --s3-location bucket=octank-config-rules,bundleType=zip,key=${{ env.S3Folder }}/deploy_artifacts.zip
+            # --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
