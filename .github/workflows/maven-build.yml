@@ -78,8 +78,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: [build]
-    environment:
-      region: 'us-east-1'
+    env:
+      Region: us-east-1
     permissions:
       id-token: write
       contents: read
@@ -94,7 +94,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           role-to-assume: arn:aws:iam::667493128782:role/GItHubNewAssumeRole
-          aws-region: ${{ env.region }}
+          aws-region: ${{ env.Region }}
           
       - name: deploy to S3
         run: |
@@ -110,4 +110,4 @@ jobs:
             --deployment-config-name CodeDeployDefault.AllAtOnce\
             --s3-location bucket=octank-config-rules,bundleType=zip,key=githubactions/deploy_artifacts.zip
             # --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
-            --region ${{ env.region }}
+            --region ${{ env.Region }}
