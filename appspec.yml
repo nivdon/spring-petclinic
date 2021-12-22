@@ -5,5 +5,5 @@ files:
     destination: /home/ec2-user/student3/
 hooks:
   ApplicationStart:
-   - location: setup.sh
+   - location: run.sh
      runas: root
