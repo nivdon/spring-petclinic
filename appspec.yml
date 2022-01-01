@@ -4,6 +4,10 @@ files:
   - source: target/
     destination: /home/ec2-user/student3/
 hooks:
+  ApplicationStop:
+   - location: stop.sh
+     runas: root
+
   ApplicationStart:
    - location: run.sh
      runas: root
