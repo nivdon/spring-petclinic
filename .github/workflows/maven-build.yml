@@ -128,4 +128,5 @@ jobs:
             --application-name Git_application \
             --deployment-group-name dg_Git_Application \
             --deployment-config-name CodeDeployDefault.AllAtOnce \
+            --ignore-application-stop-failures \
             --s3-location bucket=octank-config-rules,bundleType=zip,key=${{ env.S3Folder }}/deploy_artifacts.zip
