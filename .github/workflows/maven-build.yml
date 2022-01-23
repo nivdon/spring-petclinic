@@ -84,14 +84,14 @@ jobs:
       contents: read
       
     steps:
-      - name: Download the artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: jar-file
-      # - name: Checkout repository
-      #   uses: actions/checkout@v2
+      # - name: Download the artifact
+      #   uses: actions/download-artifact@v2
       #   with:
-      #   fetch-depth: 0 # This is a required field for CodeGuru
+      #     name: jar-file
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+        fetch-depth: 0 # This is a required field for CodeGuru
 
       - name: configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -99,11 +99,11 @@ jobs:
           role-to-assume: arn:aws:iam::667493128782:role/GItHubNewAssumeRole
           aws-region: ${{ env.Region }}
       
-      - name: unzip Artifacts
-        run: |
-          sudo apt-get install unzip
-          aws s3 cp *.zip s3://codeguru-reviewer-github-actions-nivdon/
-          unzip deploy_artifacts.zip
+      # - name: unzip Artifacts
+      #   run: |
+      #     sudo apt-get install unzip
+      #     aws s3 cp *.zip s3://codeguru-reviewer-github-actions-nivdon/
+      #     unzip deploy_artifacts.zip
           
       - name: CodeGuru Reviewer
         uses: aws-actions/codeguru-reviewer@v1.1
