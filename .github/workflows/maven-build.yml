@@ -79,27 +79,26 @@ jobs:
     needs: [build]
     
     steps:
-      # - name: Checkout repository
-      #   uses: actions/checkout@v2
-      #   with:
-      #   fetch-depth: 0 # This is a required field for CodeGuru
-
       - name: Download the artifact
         uses: actions/download-artifact@v2
         with:
           name: jar-file
-  
+      # - name: Checkout repository
+      #   uses: actions/checkout@v2
+      #   with:
+      #   fetch-depth: 0 # This is a required field for CodeGuru
+      
       - name: unzip Artifacts
-      run: |
-        sudo apt-get install unzip
-        unzip deploy_artifacts.zip
-        
+        run: |
+          sudo apt-get install unzip
+          unzip deploy_artifacts.zip
+
       - name: configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           role-to-assume: arn:aws:iam::667493128782:role/GItHubNewAssumeRole
           aws-region: ${{ env.Region }}
-        
+
       - name: CodeGuru Reviewer
         uses: aws-actions/codeguru-reviewer@v1.1
         with:
