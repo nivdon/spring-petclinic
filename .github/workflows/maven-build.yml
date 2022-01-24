@@ -104,6 +104,7 @@ jobs:
 
           
       - name: CodeGuru Reviewer
+        if: ${{ always() }}
         uses: aws-actions/codeguru-reviewer@v1.1
         with:
           build_path: target # build artifact(s) directory
