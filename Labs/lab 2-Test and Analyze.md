@@ -4,7 +4,7 @@ In this lab you will set up the continuous testing and analysis steps for your C
 <P>Please Note that this lab is dependent on Lab 1 and is to be built in continuation. </p>
 <P>Please check -</p>
 
-* That you are on the feature/Student<your number> branch. 
+* That you are on the feature/Student```<your number>``` branch. 
 
 * That you have created a .github/workflows/build.yml file.
 
@@ -30,7 +30,7 @@ test:
           distribution: 'adopt'
           cache: maven
 
-     - name: Build with Maven Wrapper
+    - name: Build with Maven Wrapper
         run: ./mvnw test
 ```
 4.Push the code
@@ -43,7 +43,7 @@ password enter the Personal access token provided to you.
 ```
 5.Check github actions workflow to see the continuous testing step added
 
-![](static/lab2-1.png)
+      ![](static/lab2-1.png)
 ## **Add Analysis Step**
 1. Sonar cloud project is already configured for your repository.  See [here](https://sonarcloud.io/) for more details on how to configure Sonar
 2. In this example we are going to use maven to submit the application for Sonar analysis. Open your .github/workflows/build.yml file.
@@ -88,7 +88,7 @@ git push
 >*password enter the Personal access token provided to you.*
 5. Check github actions workflow to see the continuous testing step added
 
-![](static/lab2-2.png)
+      ![](static/lab2-2.png)
 
 
 

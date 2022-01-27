@@ -12,19 +12,26 @@ Please check -
 ### **Change the port number for your application.** 
 * Open *application.properties file(at devopsfundamentals/src/main/resources)* files as shown below.
 
-![](static/lab4-1.png)
+    ![](static/lab4-1.png)
 Change the last digit of ```server.port:9090``` to match with your team number. </P>
-i.e. *team1* -  `server.port:9091`</p>
-  *team2* - `server.port:9092` and so on
+i.e. 
+  *team1* -  `server.port:9091`</p>
+  *team2* - `server.port:9092` </p>
+  *team1* -  `server.port:9093`</p>
+  *team2* - `server.port:9094` and so on
 
+<br>
 * Open Stop.sh at the folder root (*devopsfundamentals*)
 Change the port number to the same as in the previous file and to match with your team number</p>
 `sudo kill -9 $(sudo lsof -t -i:9090)`</br>
 change to </p>
-i.e. *team1* -  `sudo kill -9 $(sudo lsof -t -i:9091)` </p>
-  *team2* - `sudo kill -9 $(sudo lsof -t -i:9092)` and so on
+i.e. 
+  *team1* -  `sudo kill -9 $(sudo lsof -t -i:9091)` </p>
+  *team2* - `sudo kill -9 $(sudo lsof -t -i:9092)` </p>
+  *team3* -  `sudo kill -9 $(sudo lsof -t -i:9091)` </p>
+  *team4* - `sudo kill -9 $(sudo lsof -t -i:9092)` and so on
 
-![](static/lab4-2.png)
+    ![](static/lab4-2.png)
 
 ## **Add Upload Phase**
 1. You will now add the upload phase to your pipeline. This phase is optional and can be used to upload your artifacts to the artifacts repository. 
@@ -37,7 +44,7 @@ upload:
     env:
       Region: us-east-1
       S3Bucket: cnbdevopsfundamentals
-      S3Folder: githubactions0
+      S3Folder: githubactions<your team number> #change the number to match with your team number
     permissions:
       id-token: write
       contents: read
@@ -150,7 +157,7 @@ jobs:
     env:
       Region: us-east-1
       S3Bucket: cnbdevopsfundamentals
-      S3Folder: githubactions0
+      S3Folder: githubactions<your team number> #change the number to match with your team number
     permissions:
       id-token: write
       contents: read
@@ -181,14 +188,19 @@ git push
 *username- enter Student `<your number>` </p>
 password enter the Personal access token provided to you.*
 
+<br>
+
 5. Check github actions workflow to see the Upload phase added
 
-![](static/lab4-3.png)
+    ![](static/lab4-3.png)
+
+
 ## **Add Deploy Phase**
 1. AWS provides virtual servers to host applications.
 2. In this phase you can deploy the application to any destination of your choice
  In this example we are going to use AWS CodeDeploy to handle our deployment to Amazon EC2 servers. Open your .github/workflows/build.yml file.
 3. You will add the following yml code in your .github/workflows/build.ymlfile.
+
 
 ```
 deploy:
@@ -197,7 +209,7 @@ deploy:
     env:
       Region: us-east-1
       S3Bucket: cnbdevopsfundamentals
-      S3Folder: githubactions0
+      S3Folder: githubactions<your team number> #change the number to match with your team number
     permissions:
       id-token: write
       contents: read
@@ -221,11 +233,10 @@ deploy:
 ```
 
 **Rename the S3Folder section to match with your number. Search for the line**      
-`S3Folder: githubactions0` **and update it with your team folder.**
+`S3Folder: githubactions0` **and update it with your team number.**
 `S3Folder: githubactions<your team number>` </p>
-Please see below the places marked in red where you need to change `S3Folder` value
 
-```
+``` hl_lines="2 3 5"
 name: Java CI with Maven
 
 on:
@@ -311,7 +322,7 @@ jobs:
     env:
       Region: us-east-1
       S3Bucket: cnbdevopsfundamentals
-      S3Folder: githubactions0
+      S3Folder: githubactions<your team number> #change the number to match with your team number
     permissions:
       id-token: write
       contents: read
@@ -339,7 +350,7 @@ jobs:
     env:
       Region: us-east-1
       S3Bucket: cnbdevopsfundamentals
-      S3Folder: githubactions0
+      S3Folder: githubactions<your team number> #change the number to match with your team number
     permissions:
       id-token: write
       contents: read
@@ -371,10 +382,10 @@ git push
 password enter the Personal access token provided to you.*
 5. Check github actions workflow to see the Deploy phase added
 
-![](static/lab4-4.png)
+   ![](static/lab4-4.png)
+
 **Congratulations, your application is now deployed. you can view it at below url. Change the port number to match with your port number.**
 
 http://54.173.148.82:9090/
 
-
-![](static/lab4-5.png)
+  ![](static/lab4-5.png)

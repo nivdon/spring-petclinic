@@ -18,10 +18,6 @@
 
 8. Click on Settings wheel in the directory and click on show hidden files.</p>![](static/lab0-3.png)
 
-##<b> Setting up your CI Pipeline using GitHub Actions </b>
-
-GitHub Actions is a continuous integration and continuous delivery (CI/CD) platform that allows you to automate your build, test, and deployment pipeline. You can create workflows that build and test every pull request to your repository, or deploy merged pull requests to production. 
-You can configure a GitHub Actions workflow to be triggered when an event occurs in your repository, such as a pull request being opened or an issue being created. In this example we are going to use a sample JAVA spring boot application and add github actions workflow.
 
 ## Create your Git branch
 1. Clone the repository if not done already. Run the following commands on the terminal window of your cloud9.

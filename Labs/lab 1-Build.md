@@ -1,5 +1,12 @@
-# <b>DevOps Practitioner Lab 1 (~30 minutes)
-## Create GitHub Actions Workflow</B>
+# DevOps Practitioner Lab 1 (~30 minutes)
+
+## Setting up your CI Pipeline using GitHub Actions 
+
+GitHub Actions is a continuous integration and continuous delivery (CI/CD) platform that allows you to automate your build, test, and deployment pipeline. You can create workflows that build and test every pull request to your repository, or deploy merged pull requests to production. 
+You can configure a GitHub Actions workflow to be triggered when an event occurs in your repository, such as a pull request being opened or an issue being created. In this example we are going to use a sample JAVA spring boot application and add github actions workflow.
+
+
+## Create GitHub Actions Workflow
 GitHub Actions uses YAML syntax to define the workflow. Each workflow is stored as a separate YAML file in your code repository, in a directory called .github/workflows. Newly created base branch does not have the workflow folders.</n>
 1. Start setting up GitHub actions by creating .github/workflow folder. Go to the root of your project directory and run following commands.
 ```
@@ -12,7 +19,7 @@ cd workflows
 
 3. right click on workflows folder and click New File
 
-![](static/lab1-1.png)
+    ![](static/lab1-1.png)
 
 Give the name “build.yml” and Double click the file to open it. Copy paste the following content in the file. Please note that the indentation is important.
 
@@ -96,9 +103,9 @@ run following commands in your terminal
 ```
 git add .
 git commit -m "adding build action"
-git push --set-upstream origin feature/Student
+git push --set-upstream origin feature/Student0
 ```
-<mark>Change the branch name to match with the branch that you created.</mark>
+ <span style="color:red">Change the branch name to match with the branch that you created in lab 0.</span>
 
 *you will be prompted for username- enter Student ``` your team number ```
 for password enter the Personal access token provided to you*
@@ -106,19 +113,19 @@ for password enter the Personal access token provided to you*
 5. Login to GitHub and open url - <https://github.com/conceptsandbeyond/devopsfundamentals>
 6. Click on Actions tab
 
-![](static/lab1-2.png)
+   ![](static/lab1-2.png)
 
 7. you will see the most recent workflow with the commit message that you provided during the git push.
 
 8. Click on the workflow to view your commands.
 
-![](static/lab1-3.png)
+   ![](static/lab1-3.png)
 
 9. You have Successfully created the first github actions with the build job. Go ahead and click on build and explore the logs.
 
-![](static/lab1-4.png)
+   ![](static/lab1-4.png)
 
-10.Move on to the next lab to add the subsequent actions.
+10. Move on to the next lab to add the subsequent actions.
 
 
 
