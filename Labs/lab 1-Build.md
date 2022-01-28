@@ -8,6 +8,9 @@ You can configure a GitHub Actions workflow to be triggered when an event occurs
 
 ## Create GitHub Actions Workflow
 GitHub Actions uses YAML syntax to define the workflow. Each workflow is stored as a separate YAML file in your code repository, in a directory called .github/workflows. Newly created base branch does not have the workflow folders.</n>
+<br>
+<br>
+Following command need to be run in your Cloud9 Environment
 1. Start setting up GitHub actions by creating .github/workflow folder. Go to the root of your project directory and run following commands.
 ```
 mkdir .github
@@ -17,15 +20,14 @@ cd workflows
 ```
 2. Create a new yml file ``` build.yml ``` in the folder ``` .github/workflows/ ``` and add the following code. 
 
-3. right click on workflows folder and click New File
+3. Right click on workflows folder and click New File
 
     ![](static/lab1-1.png)
 
-Give the name “build.yml” and Double click the file to open it. Copy paste the following content in the file. Please note that the indentation is important.
+Give the name “build.yml” and Double click the file to open it. Copy paste the following content in the file. Please note that the indentation is important. </p>
 
+**build.yml**
 ```
-build.yml
-
 name: Java CI with Maven
 
 on:
