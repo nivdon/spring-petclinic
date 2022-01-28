@@ -2,9 +2,9 @@
 <p> 
 
 ## <b>**Setting up your Cloud9 environment**</b>
-1. Use a browser to go to  </br> https://console.aws.amazon.com/cloud9/home?region=us-east-1#
-2. use the account id: 286144240398
-3. Use the login <username> and <password> to log in. 
+1. Use a browser to go to  </br> https://286144240398.signin.aws.amazon.com/console
+2. You shold have received your `username` and `password` by the instructor
+3. Enter your `username` in **IAM user name**  and `password` in **Password** field. 
 4. You will see an AWS management console, In the service search for Cloud9, click on the cloud9 services
 5. You will see an environment created for you already. similar to below.
 
@@ -59,7 +59,8 @@ java -jar target/*.jar
 ```
 <b>Leave the application running and Open the new terminal window for the next step.</b>
 
-5. Once the application starts running, you can preview it by accessing it over your workstations’ public IP. Get your public IP by running the following command.
+5. Once the application starts running, you can preview it by accessing it over your workstations’ public IP.</p>
+    Get your public IP by running the following command.
  ```
  curl http://169.254.169.254/latest/meta-data/public-ipv4
  ```
