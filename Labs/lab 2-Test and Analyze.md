@@ -12,8 +12,8 @@ In this lab you will set up the continuous testing and analysis steps for your C
 
 ## **Add Continuous Testing**
 1. You will now add continuous testing to your pipeline. In this step you would want to continuously test the automated tests you create as you build new features
-2. In our example we are going to run unit tests. Open your .github/workflows/build.yml file.
-3. Copy paste the following content at the end of the file.
+2. In our example we are going to run unit tests. 
+3. We will need to modify .github/workflows/build.yml file and add the following code at the end of the file.
 ```
 test:
     runs-on: ubuntu-latest
@@ -33,22 +33,34 @@ test:
     - name: Build with Maven Wrapper
         run: ./mvnw test
 ```
+<br>
+To avoid any syntax errors with copying, YML files for this lab are provided in the labs folder. </p> Please run the following command to use that file. </p>
+
+```
+cd /home/ec2-user/environment/devopsfundamentals
+#To make sure you are at project root directory
+cp labs/lab2.1-test.yml .github/workflows/build.yml
+# Open your build.yml file and review contents of your files
+```
+
 4. Push the code
 ```
 git add .
 git commit -m "adding build action"
 git push 
-username- enter Student<your number>
-password enter the Personal access token provided to you.
 ```
+>*username - enter your username* </p>
+>*password - enter the Personal access token provided to you.*
+
 5. Check github actions workflow to see the continuous testing step added
 
      ![](static/lab2-1.png)
+
 ## **Add Analysis Step**
 1. Sonar cloud project is already configured for your repository.  See [here](https://sonarcloud.io/) for more details on how to configure Sonar
-2. In this example we are going to use maven to submit the application for Sonar analysis. Open your .github/workflows/build.yml file.
+2. In this example we are going to use maven to submit the application for Sonar analysis. 
 
-3. Copy paste the following content at the end of the file.
+3.  We will need to modify .github/workflows/build.yml file and add the following code at the end of the file.
 ```
  analyze:
     runs-on: ubuntu-latest
@@ -77,15 +89,26 @@ password enter the Personal access token provided to you.
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=conceptsandbeyond_devopsfundamentals
 ```
-Push the code
+<br>
+To avoid any syntax errors with copying, YML files for this lab are provided in the labs folder. </p> Please run the following command to use that file. </p>
+
+```
+cd /home/ec2-user/environment/devopsfundamentals
+# to make sure you are at project root directory
+cp labs/lab2.2-analyze.yml .github/workflows/build.yml
+# Open your build.yml file and review contents of your files
+```
+
+4. Push the code
 ```
 git add .
 git commit -m "adding Analyze action"
 git push 
 ```
->*username- enter Student* <mark>your number </mark> 
+>*username - enter your username* </p>
+>*password - enter the Personal access token provided to you.*
 
->*password enter the Personal access token provided to you.*
+
 5. Check github actions workflow to see the continuous testing step added
 
       ![](static/lab2-2.png)
