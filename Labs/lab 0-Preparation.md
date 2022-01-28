@@ -8,13 +8,13 @@
 4. You will see an AWS management console, In the service search for Cloud9, click on the cloud9 services
 5. You will see an environment created for you already. similar to below.
 
-![](static/lab0-1.png)
+        ![](static/lab0-1.png)
 
 6. You will see a card with the AWS cloud 9 environment.
 
 7. Click on the Open IDE Button, It should open your IDE. Similar to below.
 
-![](static/lab0-2.png)
+        ![](static/lab0-2.png)
 
 8. Click on Settings wheel in the directory and click on show hidden files.</p>![](static/lab0-3.png)
 
@@ -22,7 +22,7 @@
 ## Create your Git branch
 1. Clone the repository if not done already. Run the following commands on the terminal window of your cloud9.
 
-![](static/lab0-4.png)
+        ![](static/lab0-4.png)
 
 ``` 
 
@@ -41,7 +41,7 @@ git checkout -b feature/Student<team number> base
 
 ```
 
-![](static/lab0-5.png)
+        ![](static/lab0-5.png)
 
 ## Run The application Locally
 

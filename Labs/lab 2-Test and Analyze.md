@@ -33,7 +33,7 @@ test:
     - name: Build with Maven Wrapper
         run: ./mvnw test
 ```
-4.Push the code
+4. Push the code
 ```
 git add .
 git commit -m "adding build action"
@@ -41,9 +41,9 @@ git push
 username- enter Student<your number>
 password enter the Personal access token provided to you.
 ```
-5.Check github actions workflow to see the continuous testing step added
+5. Check github actions workflow to see the continuous testing step added
 
-      ![](static/lab2-1.png)
+     ![](static/lab2-1.png)
 ## **Add Analysis Step**
 1. Sonar cloud project is already configured for your repository.  See [here](https://sonarcloud.io/) for more details on how to configure Sonar
 2. In this example we are going to use maven to submit the application for Sonar analysis. Open your .github/workflows/build.yml file.
@@ -89,11 +89,5 @@ git push
 5. Check github actions workflow to see the continuous testing step added
 
       ![](static/lab2-2.png)
-
-
-
- 
-
-
 
 

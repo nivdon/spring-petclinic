@@ -8,8 +8,9 @@ Please check -
 * That you are on the feature/Student<your number> branch. 
 * That you have created a .github/workflows/build.yml file.
 * That you have a successful GitHub Actions workflow run from lab 4.
+
 ## **Prepare Application for Deployment**
-### **Change the port number for your application.** 
+### **Change the port number.** 
 * Open *application.properties file(at devopsfundamentals/src/main/resources)* files as shown below.
 
     ![](static/lab4-1.png)
@@ -21,6 +22,7 @@ i.e.
   *team2* - `server.port:9094` and so on
 
 <br>
+
 * Open Stop.sh at the folder root (*devopsfundamentals*)
 Change the port number to the same as in the previous file and to match with your team number</p>
 `sudo kill -9 $(sudo lsof -t -i:9090)`</br>
@@ -67,10 +69,10 @@ upload:
           aws s3 cp *.zip s3://${{ env.S3Bucket }}/${{ env.S3Folder }}/
 ```
 **Rename the S3Folder section to match with your number. Search for the line** </p>     
-> S3Folder: githubactions0 and update it with your team folder.  
+> Find S3Folder: githubactions0 and update it with your team folder.  
 S3Folder: githubactions`<your team number>`
 
-Please see below the places marked in red where you need to change `S3Folder` value
+your complete file should look like below
 ```
 name: Java CI with Maven
 
@@ -236,7 +238,8 @@ deploy:
 `S3Folder: githubactions0` **and update it with your team number.**
 `S3Folder: githubactions<your team number>` </p>
 
-``` hl_lines="2 3 5"
+Your complete file should look like below
+``` 
 name: Java CI with Maven
 
 on:
@@ -384,7 +387,13 @@ password enter the Personal access token provided to you.*
 
    ![](static/lab4-4.png)
 
-**Congratulations, your application is now deployed. you can view it at below url. Change the port number to match with your port number.**
+**Congratulations, your application is now deployed.**
+
+from your cloud9 terminal run the following command to get the PublicIP of the deployment server.
+
+`aws ec2 describe-instances --instance-id i-0edaf3625fea3c0bd  --query 'Reservations[*].Instances[*].PublicIpAddress'`
+
+ **you can view it at below url. Change the port number to match with your port number.**
 
 http://54.173.148.82:9090/
 
