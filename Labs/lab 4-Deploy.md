@@ -16,10 +16,10 @@ Please check -
     ![](static/lab4-1.png)
 Change the last digit of ```server.port:9090``` to match with your team number. </P>
 i.e. 
-  *team1* -  `server.port:9091`</p>
-  *team2* - `server.port:9092` </p>
-  *team1* -  `server.port:9093`</p>
-  *team2* - `server.port:9094` and so on
+  *student1* -  `server.port:9091`</p>
+  *student2* - `server.port:9092` </p>
+  *student3* -  `server.port:9093`</p>
+  *student4* - `server.port:9094` and so on
 
 <br>
 
@@ -28,10 +28,10 @@ Change the port number to the same as in the previous file and to match with you
 `sudo kill -9 $(sudo lsof -t -i:9090)`</br>
 change to </p>
 i.e. 
-  *team1* -  `sudo kill -9 $(sudo lsof -t -i:9091)` </p>
-  *team2* - `sudo kill -9 $(sudo lsof -t -i:9092)` </p>
-  *team3* -  `sudo kill -9 $(sudo lsof -t -i:9091)` </p>
-  *team4* - `sudo kill -9 $(sudo lsof -t -i:9092)` and so on
+  *student1* -  `sudo kill -9 $(sudo lsof -t -i:9091)` </p>
+  *student2* - `sudo kill -9 $(sudo lsof -t -i:9092)` </p>
+  *student3* -  `sudo kill -9 $(sudo lsof -t -i:9091)` </p>
+  *student4* - `sudo kill -9 $(sudo lsof -t -i:9092)` and so on
 
     ![](static/lab4-2.png)
 
@@ -68,127 +68,34 @@ upload:
           ls
           aws s3 cp *.zip s3://${{ env.S3Bucket }}/${{ env.S3Folder }}/
 ```
-**Rename the S3Folder section to match with your number. Search for the line** </p>     
-> Find S3Folder: githubactions0 and update it with your team folder.  
-S3Folder: githubactions`<your team number>`
 
-your complete file should look like below
+<br>
+To avoid any syntax errors with copying, YML files for this lab are provided in the labs folder. </p> Please run the following command to use that file. </p>
+
 ```
-name: Java CI with Maven
-
-on:
-  push:
-    branches: [ main, feature/* ]
-  pull_request:
-    branches: [ main ]
-
-jobs:
-  build:
-
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Set up JDK 11
-        uses: actions/setup-java@v2
-        with:
-          java-version: '11'
-          distribution: 'adopt'
-          cache: maven
-  
-      - name: Build with Maven Wrapper
-        run: ./mvnw clean -B package
-        
-      - name: Create Artifacts
-        run: |
-          sudo apt-get install zip
-          zip deploy_artifacts.zip target/*.jar appspec.yml run.sh setup.sh stop.sh
-          
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: jar-file
-          path: deploy_artifacts.zip
-        
-  test:
-    runs-on: ubuntu-latest
-    needs: [build]
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0       
-
-      - name: Set up JDK 11
-        uses: actions/setup-java@v2
-        with:
-          java-version: '11'
-          distribution: 'adopt'
-          cache: maven
-
-  analyze:
-    runs-on: ubuntu-latest
-    needs: [test]
-    steps:
-      - uses: actions/checkout@v2
-      
-      - name: Cache SonarCloud packages
-        uses: actions/cache@v1
-        with:
-        
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-
-      - name: Cache Maven packages
-        uses: actions/cache@v1
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-
-      - name: Build and analyze
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=conceptsandbeyond_devopsfundamentals
-      
-  
-  upload:
-    runs-on: ubuntu-latest
-    needs: [analyze]
-    env:
-      Region: us-east-1
-      S3Bucket: cnbdevopsfundamentals
-      S3Folder: githubactions<your team number> #change the number to match with your team number
-    permissions:
-      id-token: write
-      contents: read
-      
-    steps:
-      - name: Download an artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: jar-file
-
-      - name: configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          role-to-assume: arn:aws:iam::286144240398:role/AssumeRoleForGithubUsers
-          aws-region: ${{ env.Region }}
-          
-      - name: deploy to S3
-        run: |
-          ls
-          aws s3 cp *.zip s3://${{ env.S3Bucket }}/${{ env.S3Folder }}/
+cd /home/ec2-user/environment/devopsfundamentals
+#To make sure you are at project root directory
+cp labs/lab4.1-upload.yml .github/workflows/build.yml
+# Open your build.yml file and review contents of your files
 ```
+
+**Open your build.yml file and rename the S3Folder section to match with your number </p> Search for the line** `S3Folder: githubactions0` **and update it with your team number.**
+S3Folder: githubactions`<your team number>`</p>
+
+>e.g.</p>
+>student1 will have  `S3Folder: githubactions1`</p>
+>student2 will have  `S3Folder: githubactions2`</p>
+>student3 will have  `S3Folder: githubactions3`</p>
+>student4 will have  `S3Folder: githubactions4`</p>
+
 4. Push the code
 ```
 git add .
 git commit -m "adding upload action"
 git push 
 ```
-*username- enter Student `<your number>` </p>
-password enter the Personal access token provided to you.*
+>*username - enter your username* </p>
+>*password - enter the Personal access token provided to you.*
 
 <br>
 
@@ -234,155 +141,34 @@ deploy:
             --s3-location bucket=${{ env.S3Bucket }},bundleType=zip,key=${{ env.S3Folder }}/deploy_artifacts.zip
 ```
 
-**Rename the S3Folder section to match with your number. Search for the line**      
-`S3Folder: githubactions0` **and update it with your team number.**
-`S3Folder: githubactions<your team number>` </p>
+<br>
+To avoid any syntax errors with copying, YML files for this lab are provided in the labs folder. </p> Please run the following command to use that file. </p>
 
-Your complete file should look like below
-``` 
-name: Java CI with Maven
-
-on:
-  push:
-    branches: [ main, feature/* ]
-  pull_request:
-    branches: [ main ]
-
-jobs:
-  build:
-
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Set up JDK 11
-        uses: actions/setup-java@v2
-        with:
-          java-version: '11'
-          distribution: 'adopt'
-          cache: maven
-  
-      - name: Build with Maven Wrapper
-        run: ./mvnw clean -B package
-        
-      - name: Create Artifacts
-        run: |
-          sudo apt-get install zip
-          zip deploy_artifacts.zip target/*.jar appspec.yml run.sh setup.sh stop.sh
-          
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: jar-file
-          path: deploy_artifacts.zip
-        
-  test:
-    runs-on: ubuntu-latest
-    needs: [build]
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0       
-
-      - name: Set up JDK 11
-        uses: actions/setup-java@v2
-        with:
-          java-version: '11'
-          distribution: 'adopt'
-          cache: maven
-
-  analyze:
-    runs-on: ubuntu-latest
-    needs: [test]
-    steps:
-      - uses: actions/checkout@v2
-      
-      - name: Cache SonarCloud packages
-        uses: actions/cache@v1
-        with:
-        
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-
-      - name: Cache Maven packages
-        uses: actions/cache@v1
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-
-      - name: Build and analyze
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=conceptsandbeyond_devopsfundamentals
-      
-  
-  upload:
-    runs-on: ubuntu-latest
-    needs: [analyze]
-    env:
-      Region: us-east-1
-      S3Bucket: cnbdevopsfundamentals
-      S3Folder: githubactions<your team number> #change the number to match with your team number
-    permissions:
-      id-token: write
-      contents: read
-      
-    steps:
-      - name: Download an artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: jar-file
-
-      - name: configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          role-to-assume: arn:aws:iam::286144240398:role/AssumeRoleForGithubUsers
-          aws-region: ${{ env.Region }}
-          
-      - name: deploy to S3
-        run: |
-          ls
-          aws s3 cp *.zip s3://${{ env.S3Bucket }}/${{ env.S3Folder }}/
-          
-  deploy:
-    runs-on: ubuntu-latest
-    needs: [upload]
-    env:
-      Region: us-east-1
-      S3Bucket: cnbdevopsfundamentals
-      S3Folder: githubactions<your team number> #change the number to match with your team number
-    permissions:
-      id-token: write
-      contents: read
-      
-    steps:
-      - name: configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          role-to-assume: arn:aws:iam::286144240398:role/AssumeRoleForGithubUsers
-          aws-region: ${{ env.Region }}
-          
-          
-      - name: CodeDeploy to EC2
-        id: deploy
-        run: |
-          aws deploy create-deployment \
-            --application-name CnBDevOpsApp \
-            --deployment-group-name CnBDevOpsDG \
-            --deployment-config-name CodeDeployDefault.AllAtOnce \
-            --s3-location bucket=${{ env.S3Bucket }},bundleType=zip,key=${{ env.S3Folder }}/deploy_artifacts.zip
 ```
-Push the code
+cd /home/ec2-user/environment/devopsfundamentals
+#To make sure you are at project root directory
+cp labs/lab4.2-deploy.yml .github/workflows/build.yml
+# Open your build.yml file and review contents of your files
+```
+
+**Open your build.yml file and rename the S3Folder section to match with your number </p> Search for the line** `S3Folder: githubactions0` **and update it with your team number.**
+S3Folder: githubactions`<your team number>`</p>
+
+>e.g.</p>
+>student1 will have  `S3Folder: githubactions1`</p>
+>student2 will have  `S3Folder: githubactions2`</p>
+>student3 will have  `S3Folder: githubactions3`</p>
+>student4 will have  `S3Folder: githubactions4`</p>
+
+4. Push the code
 ```
 git add .
 git commit -m "adding Deploy action"
 git push 
 ```
-*username- enter Student`<your number>`
-password enter the Personal access token provided to you.*
+>*username - enter your username* </p>
+>*password - enter the Personal access token provided to you.*
+
 5. Check github actions workflow to see the Deploy phase added
 
    ![](static/lab4-4.png)
