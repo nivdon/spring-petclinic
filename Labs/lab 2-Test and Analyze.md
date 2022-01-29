@@ -52,7 +52,8 @@ git push
 >*username - enter your username* </p>
 >*password - enter the Personal access token provided to you.*
 
-5. Check github actions workflow to see the continuous testing step added
+5. Check github actions workflow to see the continuous testing step added </p>
+   Go to URL https://github.com/conceptsandbeyond/devopsfundamentals/actions
 
      ![](static/lab2-1.png)
 
