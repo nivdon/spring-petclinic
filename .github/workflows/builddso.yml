@@ -151,32 +151,31 @@ jobs:
           
   
   
-  
-    deployprod:
-    runs-on: ubuntu-latest
-    environment: prod
-    needs: [zap_scan]
-    env:
-      Region: us-east-1
-      S3Folder: githubactions3
-    permissions:
-      id-token: write
-      contents: read
-      
-    steps:
-      - name: configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          role-to-assume: arn:aws:iam::667493128782:role/GItHubNewAssumeRole
-          aws-region: ${{ env.Region }}
-          
-          
-      - name: CodeDeploy to EC2
-        id: deploy
-        run: |
-          aws deploy create-deployment \
-            --application-name Git_application \
-            --deployment-group-name dg-deploy-prod \
-            --deployment-config-name CodeDeployDefault.AllAtOnce \
-            --ignore-application-stop-failures \
-            --s3-location bucket=octank-config-rules,bundleType=zip,key=${{ env.S3Folder }}/deploy_artifacts.zip
+  deployprod:
+  runs-on: ubuntu-latest
+  environment: prod
+  needs: [zap_scan]
+  env:
+    Region: us-east-1
+    S3Folder: githubactions3
+  permissions:
+    id-token: write
+    contents: read
+    
+  steps:
+    - name: configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: arn:aws:iam::667493128782:role/GItHubNewAssumeRole
+        aws-region: ${{ env.Region }}
+        
+        
+    - name: CodeDeploy to EC2
+      id: deploy
+      run: |
+        aws deploy create-deployment \
+          --application-name Git_application \
+          --deployment-group-name dg-deploy-prod \
+          --deployment-config-name CodeDeployDefault.AllAtOnce \
+          --ignore-application-stop-failures \
+          --s3-location bucket=octank-config-rules,bundleType=zip,key=${{ env.S3Folder }}/deploy_artifacts.zip
