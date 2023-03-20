@@ -20,9 +20,9 @@ You can then access petclinic here: http://localhost:8080/
 
 Or you can run it from Maven directly using the Spring Boot Maven plugin. If you do this it will pick up changes that you make in the project immediately (changes to Java source files require a compile as well - most people use an IDE for this):
 
-```
+``````
 ./mvnw spring-boot:run
-```
+``````
 
 > NOTE: Windows users should set `git config core.autocrlf true` to avoid format assertions failing the build (use `--global` to set that flag globally).
 
